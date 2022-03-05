@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.javaboy.vhr.mapper.EquipMapper" >
+    <resultMap id="BaseResultMap" type="org.javaboy.vhr.model.Equip" >
+        <id column="id" property="id" jdbcType="INTEGER" />
+        <result column="kind" property="kind" jdbcType="VARCHAR" />
+        <result column="name" property="name" jdbcType="VARCHAR" />
+        <result column="size" property="size" jdbcType="VARCHAR" />
+    </resultMap>
+    <sql id="Base_Column_List" >
+        id, kind,name,size
+    </sql>
+    <delete id="deleteEquipsByIds">
+        delete from equipment where id in
+        <foreach collection="ids" item="id" close=")" open="(" separator=",">
+            #{id}
+        </foreach>
+    </delete>
+    <select id="getAllEquips" resultMap="BaseResultMap" >
+        select * from equipment
+        where kind = #{kind,jdbcType=VARCHAR} or name = #{kind,jdbcType=VARCHAR}
+    </select>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+        select
+        <include refid="Base_Column_List" />
+        from equipment
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+        delete from equipment
+        where id = #{id,jdbcType=INTEGER}
+    </delete>
+    <insert id="insert" parameterType="org.javaboy.vhr.model.Equip" >
+        insert into equipment (id, name, kind,
+                               size)
+        values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{kind,jdbcType=VARCHAR},
+                #{size,jdbcType=VARCHAR})
+    </insert>
+    <insert id="insertSelective" parameterType="org.javaboy.vhr.model.Equip" >
+        insert into equipment
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="id != null" >
+                id,
+            </if>
+            <if test="name != null" >
+                name,
+            </if>
+            <if test="kind != null" >
+                kind,
+            </if>
+            <if test="size != null" >
+                size,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="id != null" >
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="name != null" >
+                #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="kind != null" >
+                #{kind,jdbcType=VARCHAR},
+            </if>
+            <if test="size != null" >
+                #{size,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="org.javaboy.vhr.model.Equip" >
+        update equipment
+        <set >
+            <if test="name != null" >
+                name = #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="kind != null" >
+                kind = #{kind,jdbcType=VARCHAR},
+            </if>
+            <if test="size != null" >
+                size = #{size,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="org.javaboy.vhr.model.Equip" >
+        update equipment
+        set name = #{name,jdbcType=VARCHAR},
+            kind = #{kind,jdbcType=VARCHAR},
+            size = #{size,jdbcType=VARCHAR}
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+</mapper>

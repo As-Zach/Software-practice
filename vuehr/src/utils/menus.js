@@ -46,6 +46,16 @@ export const formatRoutes = (routes) => {
                     require(['../views/sta/' + component + '.vue'], resolve);
                 } else if (component.startsWith("Sys")) {
                     require(['../views/sys/' + component + '.vue'], resolve);
+                } else if (component.startsWith("map")) {
+                    require(['../views/map/' + component + '.vue'], resolve);
+                } else if (component.startsWith("Res")) {
+                    require(['../views/res/' + component + '.vue'], resolve);
+                } else if (component.startsWith("Time")) {
+                    require(['../views/time/' + component + '.vue'], resolve);
+                } else if (component.startsWith("equip")) {
+                    require(['../views/equip/' + component + '.vue'], resolve);
+                } else if (component.startsWith("User")) {
+                    require(['../views/user/' + component + '.vue'], resolve);
                 }
             }
         }

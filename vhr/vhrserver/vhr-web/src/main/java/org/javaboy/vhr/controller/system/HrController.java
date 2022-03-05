@@ -26,17 +26,27 @@ public class HrController {
     HrService hrService;
     @Autowired
     RoleService roleService;
-    @GetMapping("/")
-    public List<Hr> getAllHrs(String keywords) {
+    @GetMapping("/{keywords}")
+    public List<Hr> getAllHrs(@PathVariable String keywords) {
         return hrService.getAllHrs(keywords);
     }
-
+    @GetMapping("/")
+    public List<Hr> justGetAllHrs() {
+        return hrService.justGetAllHrs();
+    }
     @PutMapping("/")
     public RespBean updateHr(@RequestBody Hr hr) {
         if (hrService.updateHr(hr) == 1) {
             return RespBean.ok("更新成功!");
         }
         return RespBean.error("更新失败!");
+    }
+    @PostMapping("/")
+    public RespBean addHr(@RequestBody Hr hr) {
+        if (hrService.insertHr(hr) == 1) {
+            return RespBean.ok("注册成功!");
+        }
+        return RespBean.error("注册失败!");
     }
     @GetMapping("/roles")
     public List<Role> getAllRoles() {

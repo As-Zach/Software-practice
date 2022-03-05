@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.javaboy.vhr.mapper.ChartMapper">
+    <resultMap id="BaseResultMap" type="org.javaboy.vhr.model.Chart">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="datax" property="datax" jdbcType="VARCHAR"/>
+        <result column="datay" property="datay" jdbcType="INTEGER"/>
+        <result column="temp" property="temp" jdbcType="INTEGER"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        id, datax, datay ,temp
+    </sql>
+    <insert id="insert" parameterType="org.javaboy.vhr.model.Chart">
+        insert into Chart (id, datax, datay ,temp)
+        values (#{id,jdbcType=INTEGER}, #{datax,jdbcType=VARCHAR}, #{datay,jdbcType=INTEGER} ,#{temp,jdbcType=INTEGER})
+    </insert>
+    <select id="getAllChart" resultMap="BaseResultMap">
+        select * from Chart;
+    </select>
+    <select id="getdatax" resultMap="BaseResultMap">
+        select datax from Chart;
+    </select>
+    <select id="getdatay" resultMap="BaseResultMap">
+        select datay from Chart;
+    </select>
+</mapper>

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.javaboy.vhr.mapper.ResBedMapper">
+    <resultMap id="BaseResultMap"
+               type="org.javaboy.vhr.model.ResBed">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="name" property="name" jdbcType="VARCHAR"
+        />
+        <result column="url" property="url" jdbcType="VARCHAR"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        id, name, url
+    </sql>
+    <select id="getAllImages" resultMap="BaseResultMap">
+        select *
+        from resBed;
+    </select>
+    <select id="selectById" resultMap="BaseResultMap">
+        select
+        *
+        from resBed
+        where name = #{name,jdbcType=VARCHAR}
+    </select>
+    <delete id="deleteById" parameterType="java.lang.Integer">
+        delete
+        from resBed
+        where id = #{id,jdbcType=INTEGER}
+    </delete>
+    <insert id="insert"
+            parameterType="org.javaboy.vhr.model.ResBed">
+        insert into resBed (id, name, url)
+        values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR},
+                #{url,jdbcType=VARCHAR})
+    </insert>
+    <update id="updateById"
+            parameterType="org.javaboy.vhr.model.ResBed">
+        update resBed
+        set name = #{name,jdbcType=VARCHAR},
+            url  = #{url,jdbcType=VARCHAR}
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+</mapper>

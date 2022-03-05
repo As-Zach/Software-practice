@@ -21,8 +21,8 @@
         </collection>
     </resultMap>
     <sql id="Base_Column_List">
-    id, name, phone, telephone, address, enabled, username, password, userface, remark
-  </sql>
+        id, name, phone, telephone, address, enabled, username, password, userface, remark
+    </sql>
     <select id="getAllHrsExceptCurrentHr" resultMap="BaseResultMap">
         select * from hr where id !=#{id};
     </select>
@@ -36,11 +36,11 @@
         order by hr.id
     </select>
     <select id="getHrRolesById" resultType="org.javaboy.vhr.model.Role">
-    select r.* from role r,hr_role hrr where hrr.`rid`=r.`id` and hrr.`hrid`=#{id}
-  </select>
+        select r.* from role r,hr_role hrr where hrr.`rid`=r.`id` and hrr.`hrid`=#{id}
+    </select>
     <select id="loadUserByUsername" resultMap="BaseResultMap">
-    select * from hr where username=#{username}
-  </select>
+        select * from hr where username=#{username}
+    </select>
     <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
         select
         <include refid="Base_Column_List"/>
@@ -48,19 +48,19 @@
         where id = #{id,jdbcType=INTEGER}
     </select>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from hr
-    where id = #{id,jdbcType=INTEGER}
-  </delete>
+        delete from hr
+        where id = #{id,jdbcType=INTEGER}
+    </delete>
     <insert id="insert" parameterType="org.javaboy.vhr.model.Hr">
-    insert into hr (id, name, phone, 
-      telephone, address, enabled, 
-      username, password, userface, 
-      remark)
-    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{phone,jdbcType=CHAR}, 
-      #{telephone,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, #{enabled,jdbcType=BIT}, 
-      #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, #{userface,jdbcType=VARCHAR}, 
-      #{remark,jdbcType=VARCHAR})
-  </insert>
+        insert into hr (id, name, phone,
+                        telephone, address, enabled,
+                        username, password, userface,
+                        remark)
+        values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{phone,jdbcType=CHAR},
+                #{telephone,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, #{enabled,jdbcType=BIT},
+                #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, #{userface,jdbcType=VARCHAR},
+                #{remark,jdbcType=VARCHAR})
+    </insert>
     <insert id="insertSelective" parameterType="org.javaboy.vhr.model.Hr">
         insert into hr
         <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -168,16 +168,19 @@
         update hr set password = #{encodePass} where id=#{hrid};
     </update>
     <update id="updateByPrimaryKey" parameterType="org.javaboy.vhr.model.Hr">
-    update hr
-    set name = #{name,jdbcType=VARCHAR},
-      phone = #{phone,jdbcType=CHAR},
-      telephone = #{telephone,jdbcType=VARCHAR},
-      address = #{address,jdbcType=VARCHAR},
-      enabled = #{enabled,jdbcType=BIT},
-      username = #{username,jdbcType=VARCHAR},
-      password = #{password,jdbcType=VARCHAR},
-      userface = #{userface,jdbcType=VARCHAR},
-      remark = #{remark,jdbcType=VARCHAR}
-    where id = #{id,jdbcType=INTEGER}
-  </update>
+        update hr
+        set name = #{name,jdbcType=VARCHAR},
+            phone = #{phone,jdbcType=CHAR},
+            telephone = #{telephone,jdbcType=VARCHAR},
+            address = #{address,jdbcType=VARCHAR},
+            enabled = #{enabled,jdbcType=BIT},
+            username = #{username,jdbcType=VARCHAR},
+            password = #{password,jdbcType=VARCHAR},
+            userface = #{userface,jdbcType=VARCHAR},
+            remark = #{remark,jdbcType=VARCHAR}
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <select id="justGetAllHrs" resultType="org.javaboy.vhr.model.Hr">
+        select * from hr;
+    </select>
 </mapper>

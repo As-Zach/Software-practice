@@ -2,7 +2,7 @@ spring:
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource
     username: root
-    password: 123
+    password: mysql
     url: jdbc:mysql://localhost:3306/vhr?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
   rabbitmq:
     username: guest
@@ -14,13 +14,13 @@ spring:
     host: 127.0.0.1
     database: 0
     port: 6379
-    password: 123
+    password: 12345
   cache:
     cache-names: menus_cache
 server:
-  port: 8081
+  port: 8083
   compression:
     enabled: true
 fastdfs:
   nginx:
-    host: http://192.168.91.128/
+    host: http://127.0.0.4/

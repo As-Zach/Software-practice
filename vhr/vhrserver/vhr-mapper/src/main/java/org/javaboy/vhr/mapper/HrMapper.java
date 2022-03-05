@@ -30,4 +30,6 @@ public interface HrMapper {
     Integer updatePasswd(@Param("hrid") Integer hrid, @Param("encodePass") String encodePass);
 
     Integer updateUserface(@Param("url") String url, @Param("id") Integer id);
+
+    List<Hr> justGetAllHrs();
 }

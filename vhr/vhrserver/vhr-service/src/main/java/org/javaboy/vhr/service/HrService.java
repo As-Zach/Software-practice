@@ -40,14 +40,25 @@ public class HrService implements UserDetailsService {
         return hr;
     }
 
+
+    public List<Hr> justGetAllHrs() {
+        return hrMapper.justGetAllHrs();
+    }
     public List<Hr> getAllHrs(String keywords) {
         return hrMapper.getAllHrs(HrUtils.getCurrentHr().getId(),keywords);
     }
 
     public Integer updateHr(Hr hr) {
+        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+        hr.setPassword(encoder.encode(hr.getPassword()));
         return hrMapper.updateByPrimaryKeySelective(hr);
-    }
 
+    }
+    public Integer insertHr(Hr hr) { // Only for Admin or registry
+        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+        hr.setPassword(encoder.encode(hr.getPassword()));
+        return hrMapper.insertSelective(hr);
+    }
     @Transactional
     public boolean updateHrRole(Integer hrid, Integer[] rids) {
         hrRoleMapper.deleteByHrid(hrid);
