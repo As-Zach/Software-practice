@@ -1,5 +1,13 @@
 <template>
-  <div id="allmap" > </div>
+
+  <div>
+    <el-container>
+      <el-header  height="300px" id ="allmap1"></el-header>
+      <el-header  height="300px" id ="allmap2"></el-header>
+    </el-container>
+
+  </div>
+
 </template>
 
 <script>
@@ -17,10 +25,39 @@ export default {
     },
     init(){
       let BMap=window.BMap;
-      var map = new BMap.Map("allmap");
-      map.centerAndZoom(new BMap.Point(116.253981,40.224412),15);
-      map.setCurrentCity("北京");
-      map.enableScrollWheelZoom(true);
+      let A='116.403963';
+      let B='39.915119';
+      let C='15';
+      var map1 = new BMap.Map("allmap1");
+      map1.centerAndZoom(new BMap.Point(A,B),C);
+      map1.addControl(new BMap.MapTypeControl({
+        mapTypes:[
+          BMAP_NORMAL_MAP,
+          BMAP_HYBRID_MAP
+        ]}));
+      //map1.setCurrentCity("南京");
+      map1.enableScrollWheelZoom(true);
+      map1.addEventListener('click', function (e) {
+        A=e.point.lng;
+        B=e.point.lat;
+        C=map1.getZoom();
+        map2.centerAndZoom(new BMap.Point(A,B),C);
+      });
+
+      var map2 = new BMap.Map("allmap2",{mapType:BMAP_HYBRID_MAP});
+      map2.centerAndZoom(new BMap.Point(A,B),C);
+      map2.addControl(new BMap.MapTypeControl({
+        mapTypes:[
+          BMAP_NORMAL_MAP,
+          BMAP_HYBRID_MAP
+        ]}));
+      map2.enableScrollWheelZoom(true);
+      map2.addEventListener('click', function (e) {
+        A=e.point.lng;
+        B=e.point.lat;
+        C=map2.getZoom();
+        map1.centerAndZoom(new BMap.Point(A,B),C);
+      });
     },
   },
   mounted() {
@@ -30,13 +67,18 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-#allmap{
+#allmap1{
   width: 100%;
-  height: 90%;
+  height: 100%;
   overflow: hidden;
   margin: 0;
   font-family: "微软雅黑",serif;
-
 }
-
+#allmap2{
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  margin: 0;
+  font-family: "微软雅黑",serif;
+}
 </style>

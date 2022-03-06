@@ -20,7 +20,7 @@
       </el-table>
       <el-button @click="deleteMany" type="danger" size="small" style="margin-top: 8px" :disabled="multipleSelection.length==0">批量删除</el-button>
     </div>
-    <el-dialog title="地图展示" :visible.sync="dialogVisible_show" width="80%">
+    <el-dialog title="地图展示" :visible.sync="dialogVisible_show" width="80%" >
       <el-container>
         <el-aside style="width: 50%;">
           <vl-map :load-tiles-while-animating="true" :load-tiles-while-interacting="true" style="height: 800px;" data-projection="EPSG:4326">
